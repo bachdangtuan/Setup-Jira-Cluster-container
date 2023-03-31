@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  node1:
+    image: atlassian/jira-software:8.19.1
+    ports:
+     - 40000:8080
+    volumes:
+      - ./jira-isofh-1:/var/atlassian/application-data/jira:Z
+      - ./jira-sharedata:/var/atlassian/jira-sharedata:z
+    environment:
+      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+  node2:
+    image: atlassian/jira-software:8.19.1
+    ports:
+     - 41000:8080 
+    volumes:
+      - ./jira-isofh-2:/var/atlassian/application-data/jira:Z
+      - ./jira-sharedata:/var/atlassian/jira-sharedata:z
+    environment:
+      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535

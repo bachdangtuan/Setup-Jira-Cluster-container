@@ -6,7 +6,7 @@ services:
     ports:
      - 40000:8080
     volumes:
-      - ./jira-isofh-1:/var/atlassian/application-data/jira:Z
+      - ./jira-isofh-01:/var/atlassian/application-data/jira:Z
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1
@@ -20,7 +20,7 @@ services:
     ports:
      - 41000:8080 
     volumes:
-      - ./jira-isofh-2:/var/atlassian/application-data/jira:Z
+      - ./jira-isofh-02:/var/atlassian/application-data/jira:Z
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z
     environment:
       CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2

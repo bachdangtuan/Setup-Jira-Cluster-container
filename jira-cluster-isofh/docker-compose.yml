@@ -2,9 +2,9 @@ version: '3'
 
 services:
   node1:
-    image: atlassian/jira-software:8.19.1
+    image: isofh/jira
     ports:
-     - 40000:8080
+     - 30000:8080
     volumes:
       - ./jira-isofh-01:/var/atlassian/application-data/jira:Z
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z
@@ -16,9 +16,9 @@ services:
         soft: 65535
         hard: 65535
   node2:
-    image: atlassian/jira-software:8.19.1
+    image: isofh/jira
     ports:
-     - 41000:8080 
+     - 31000:8080 
     volumes:
       - ./jira-isofh-02:/var/atlassian/application-data/jira:Z
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z

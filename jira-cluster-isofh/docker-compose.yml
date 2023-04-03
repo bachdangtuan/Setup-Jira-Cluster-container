@@ -4,12 +4,12 @@ services:
   node1:
     image: isofh/jira
     ports:
-     - 30000:8080
+      - 30000:8080
     volumes:
       - ./jira-isofh-01:/var/atlassian/application-data/jira:Z
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z
     environment:
-      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1
+      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=Asia/Ho_Chi_Minh -Xms1048m -Xmx3500m
     ulimits:
       nproc: 65535
       nofile:
@@ -18,12 +18,12 @@ services:
   node2:
     image: isofh/jira
     ports:
-     - 31000:8080 
+      - 31000:8080
     volumes:
       - ./jira-isofh-02:/var/atlassian/application-data/jira:Z
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z
     environment:
-      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2
+      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2 -Duser.timezone=Asia/Ho_Chi_Minh -Xms1048m -Xmx3500m
     ulimits:
       nproc: 65535
       nofile:

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   node1:
-    image: isofh/jira
+    image: bachdangtuan/jira
     ports:
       - 30000:8080
     volumes:

@@ -1,4 +1,4 @@
-FROM openjdk:24-bullseye
+FROM openjdk:17-bullseye
 
 ARG JIRA_VERSION=9.17.1
 ARG JIRA_PRODUCT=jira-software

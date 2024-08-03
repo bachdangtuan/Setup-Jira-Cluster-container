@@ -13,8 +13,6 @@ services:
       - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=${TZ} -Xms6048m -Xmx6048m
     ulimits:
       core: 0
-      cpu_quota: 50000
-      cpu_period: 100000
       data: 1000000
       fsize: 1000000
       memlock:

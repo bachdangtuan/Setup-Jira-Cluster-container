@@ -1,31 +1,64 @@
-version: '3'
+version: "3"
 
 services:
   node1:
     image: isofh/jira
     ports:
-      - 30000:8080
+      - "30000:8080"
     volumes:
       - ./jira-isofh-01:/var/atlassian/application-data/jira:Z
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z
     environment:
-      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=Asia/Ho_Chi_Minh -Xms1048m -Xmx3500m
+      - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=Asia/Ho_Chi_Minh -Xms1048m -Xmx3500m
     ulimits:
       nproc: 65535
       nofile:
         soft: 65535
         hard: 65535
-  node2:
-    image: isofh/jira
-    ports:
-      - 31000:8080
-    volumes:
-      - ./jira-isofh-02:/var/atlassian/application-data/jira:Z
-      - ./jira-sharedata:/var/atlassian/jira-sharedata:z
+    networks:
+      - network-bridge
+
+  # Uncomment the following to add node2 to the cluster
+  # node2:
+  #   image: isofh/jira
+  #   ports:
+  #     - "31000:8080"
+  #   volumes:
+  #     - ./jira-isofh-02:/var/atlassian/application-data/jira:Z
+  #     - ./jira-sharedata:/var/atlassian/jira-sharedata:z
+  #   environment:
+  #     - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node2 -Duser.timezone=Asia/Ho_Chi_Minh -Xms1048m -Xmx3500m
+  #   ulimits:
+  #     nproc: 65535
+  #     nofile:
+  #       soft: 65535
+  #       hard: 65535
+  #   networks:
+  #     - network-bridge
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-jira
     environment:
-      CATALINA_OPTS: -Datlassian.cluster.scale=true -DjvmRoute=node2 -Duser.timezone=Asia/Ho_Chi_Minh -Xms1048m -Xmx3500m
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 65535
-        hard: 65535
+      - TZ=Asia/Ho_Chi_Minh
+      - MYSQL_DATABASE=jira
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_USER=jira
+      - MYSQL_PASSWORD=123123
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_bin",
+      ]
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    networks:
+      - network-bridge
+
+networks:
+  network-bridge:
+
+volumes:
+  mysql_data:

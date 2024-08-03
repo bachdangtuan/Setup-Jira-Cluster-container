@@ -2,7 +2,7 @@ version: "3"
 
 services:
   nodejra:
-    image: bachdangtuan/atlassian-jira:9.17.1
+    image: bachdangtuan/atlassian-jira-slim:9.17
     container_name: jira
     ports:
       - "30000:8080"

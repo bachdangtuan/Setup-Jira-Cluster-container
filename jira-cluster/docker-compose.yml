@@ -12,15 +12,10 @@ services:
     environment:
       - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=${TZ} -Xms6048m -Xmx6048m
     ulimits:
-      data: 1000000
-      fsize: 1000000
       nproc: 4096
       nofile:
         soft: 65535
         hard: 65535
-      memlock:
-        soft: -1
-        hard: -1
     networks:
       - network-bridge
   databasejira:
@@ -38,9 +33,6 @@ services:
       nofile:
         soft: 65535
         hard: 65535
-      memlock:
-        soft: -1
-        hard: -1
     volumes:
       - ./jira_postgres_data:/var/lib/postgresql/data
     networks:

@@ -2,7 +2,7 @@ version: "3"
 
 services:
   node1:
-    image: isofh/jira
+    image: atlassian/jira-software:9.12.12
     ports:
       - "30000:8080"
     volumes:

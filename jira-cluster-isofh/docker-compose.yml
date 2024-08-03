@@ -20,14 +20,14 @@ services:
 
   # Uncomment the following to add node2 to the cluster
   # node2:
-  #   image: isofh/jira
+  #   image: atlassian/jira-software:9.12.12
   #   ports:
   #     - "31000:8080"
   #   volumes:
   #     - ./jira-isofh-02:/var/atlassian/application-data/jira:Z
   #     - ./jira-sharedata:/var/atlassian/jira-sharedata:z
   #   environment:
-  #     - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node2 -Duser.timezone=Asia/Ho_Chi_Minh -Xms1048m -Xmx3500m
+  #     - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node2 -Duser.timezone=Asia/Ho_Chi_Minh -Xms6048m -Xmx6048m
   #   ulimits:
   #     nproc: 65535
   #     nofile:
@@ -36,26 +36,15 @@ services:
   #   networks:
   #     - network-bridge
 
-  mysql:
-    image: mysql:8.0
-    container_name: mysql-jira
-    ports:
-      - "3306:3306"
+  db:
+    image: postgres:13
+    container_name: postgres
     environment:
-      - TZ=Asia/Ho_Chi_Minh
-      - MYSQL_DATABASE=jira
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_USER=jira
-      - MYSQL_PASSWORD=123123
-    command:
-      [
-        "mysqld",
-        "--character-set-server=utf8mb4",
-        "--collation-server=utf8mb4_bin",
-      ]
+      - POSTGRES_DB=jiradb  # Database name
+      - POSTGRES_USER=jiradbuser  # PostgreSQL username
+      - POSTGRES_PASSWORD=123123  # PostgreSQL password
     volumes:
-      - mysql_data:/var/lib/mysql
-    restart: always
+      - jira_postgres_data:/var/lib/postgresql/data
     networks:
       - network-bridge
 
@@ -63,4 +52,4 @@ networks:
   network-bridge:
 
 volumes:
-  mysql_data:
+  jira_postgres_data:

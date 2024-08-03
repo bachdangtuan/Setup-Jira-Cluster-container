@@ -54,3 +54,6 @@ services:
       - ./jira_postgres_data:/var/lib/postgresql/data
     networks:
       - network-bridge
+networks:
+  network-bridge:
+    driver: bridge

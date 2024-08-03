@@ -1,7 +1,6 @@
 FROM openjdk:17-bullseye
 ARG JIRA_VERSION=9.17.1
 ARG JIRA_PRODUCT=jira-software
-ARG AGENT_VERSION=1.3.3
 
 COPY atlassian-agent.jar ${AGENT_PATH}/${AGENT_FILENAME}
 

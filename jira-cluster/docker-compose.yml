@@ -11,9 +11,6 @@ services:
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z
     environment:
       - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=Asia/Ho_Chi_Minh -Xms6048m -Xmx6048m
-      - AGENT_PATH=/var/agent 
-      - AGENT_FILENAME=atlassian-agent.jar
-      - JAVA_OPTS="-javaagent:${AGENT_PATH}/${AGENT_FILENAME} ${JAVA_OPTS}"
     ulimits:
       nproc: 65535
       nofile:

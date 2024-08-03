@@ -15,18 +15,14 @@ services:
       core: 0
       data: 1000000
       fsize: 1000000
+      nproc: 4096
+      nofile:
+        soft: 1024
+        hard: 4096
       memlock:
         soft: -1
         hard: -1
-      rss: 2000000
       stack: 8192
-      locks: 1000000
-      sigpending: 100
-      msgqueue: 819200
-      nproc: 65535
-      nofile:
-        soft: 65535
-        hard: 65535
     networks:
       - network-bridge
   databasejira:

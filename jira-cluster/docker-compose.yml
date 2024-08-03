@@ -1,8 +1,9 @@
 version: "3"
 
 services:
-  node1:
+  nodejra:
     image: bachdangtuan/atlassian-jira:9.17.1
+    container_name: jira-app
     ports:
       - "30000:8080"
     volumes:
@@ -19,13 +20,13 @@ services:
       - network-bridge
   db:
     image: postgres:13
-    container_name: postgres
+    container_name: postgres-database
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=jiradb # Database name
-      - POSTGRES_USER=jiradbuser # PostgreSQL username
-      - POSTGRES_PASSWORD=123123 # PostgreSQL password
+      - POSTGRES_DB=jiradb
+      - POSTGRES_USER=jiradbuser 
+      - POSTGRES_PASSWORD=123123 
     volumes:
       - ./jira_postgres_data:/var/lib/postgresql/data
     networks:

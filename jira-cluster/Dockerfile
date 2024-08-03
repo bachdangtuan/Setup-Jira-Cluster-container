@@ -1,8 +1,5 @@
-FROM openjdk:11-bullseye
-
-
+FROM openjdk:11-jdk-slim
 ARG JIRA_VERSION=9.17.1
-# Production: jira-software jira-core
 ARG JIRA_PRODUCT=jira-software
 ARG AGENT_VERSION=1.3.3
 
@@ -19,7 +16,7 @@ ENV JIRA_USER=jira \
 ENV JAVA_OPTS="-javaagent:${AGENT_PATH}/${AGENT_FILENAME} ${JAVA_OPTS}"
 
 RUN mkdir -p ${JIRA_INSTALL} ${JIRA_HOME} ${AGENT_PATH} \
-    && curl -o ${AGENT_PATH}/${AGENT_FILENAME}  https://github.com/haxqer/jira/releases/download/v${AGENT_VERSION}/atlassian-agent.jar -L \
+    # && curl -o ${AGENT_PATH}/${AGENT_FILENAME}  https://github.com/haxqer/jira/releases/download/v${AGENT_VERSION}/atlassian-agent.jar -L \
     && curl -o /tmp/atlassian.tar.gz https://product-downloads.atlassian.com/software/jira/downloads/atlassian-${JIRA_PRODUCT}-${JIRA_VERSION}.tar.gz -L \
     && tar xzf /tmp/atlassian.tar.gz -C ${JIRA_INSTALL}/ --strip-components 1 \
     && rm -f /tmp/atlassian.tar.gz \

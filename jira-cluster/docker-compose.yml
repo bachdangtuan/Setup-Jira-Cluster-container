@@ -2,11 +2,11 @@ version: "3"
 
 services:
   node1:
-    image: atlassian/jira-software:9.12.12
+    image: atlassian/jira-software:8.19
     ports:
       - "30000:8080"
     volumes:
-      - ./jira-isofh-01:/var/atlassian/application-data/jira:Z
+      - ./jira-01:/var/atlassian/application-data/jira:Z
       - ./jira-sharedata:/var/atlassian/jira-sharedata:z
     environment:
       - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=Asia/Ho_Chi_Minh -Xms6048m -Xmx6048m

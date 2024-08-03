@@ -31,3 +31,6 @@ WORKDIR $JIRA_SETUP
 EXPOSE 8080
 
 ENTRYPOINT ["/opt/jira/bin/start-jira.sh", "-fg"]
+
+
+

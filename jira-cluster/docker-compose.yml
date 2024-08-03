@@ -7,8 +7,7 @@ services:
     ports:
       - "30000:8080"
     volumes:
-      - ./jira-01:/var/atlassian/application-data/jira:Z
-      - ./jira-sharedata:/var/atlassian/jira-sharedata:z
+      - ./jira-01:/var/jira:Z
     environment:
       - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=${TZ} -Xms6048m -Xmx6048m
     ulimits:

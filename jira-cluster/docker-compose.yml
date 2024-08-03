@@ -27,7 +27,7 @@ services:
       - POSTGRES_USER=jiradbuser # PostgreSQL username
       - POSTGRES_PASSWORD=123123 # PostgreSQL password
     volumes:
-      - jira_postgres_data:/var/lib/postgresql/data
+      - ./jira_postgres_data:/var/lib/postgresql/data
     networks:
       - network-bridge
 

@@ -2,7 +2,7 @@ version: "3"
 
 services:
   node1:
-    image: atlassian/jira-software:8.19
+    image: bachdangtuan/atlassian-jira:9.17.1
     ports:
       - "30000:8080"
     volumes:
@@ -17,34 +17,15 @@ services:
         hard: 65535
     networks:
       - network-bridge
-
-  # Uncomment the following to add node2 to the cluster
-  # node2:
-  #   image: atlassian/jira-software:9.12.12
-  #   ports:
-  #     - "31000:8080"
-  #   volumes:
-  #     - ./jira-isofh-02:/var/atlassian/application-data/jira:Z
-  #     - ./jira-sharedata:/var/atlassian/jira-sharedata:z
-  #   environment:
-  #     - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node2 -Duser.timezone=Asia/Ho_Chi_Minh -Xms6048m -Xmx6048m
-  #   ulimits:
-  #     nproc: 65535
-  #     nofile:
-  #       soft: 65535
-  #       hard: 65535
-  #   networks:
-  #     - network-bridge
-
   db:
     image: postgres:13
     container_name: postgres
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=jiradb  # Database name
-      - POSTGRES_USER=jiradbuser  # PostgreSQL username
-      - POSTGRES_PASSWORD=123123  # PostgreSQL password
+      - POSTGRES_DB=jiradb # Database name
+      - POSTGRES_USER=jiradbuser # PostgreSQL username
+      - POSTGRES_PASSWORD=123123 # PostgreSQL password
     volumes:
       - jira_postgres_data:/var/lib/postgresql/data
     networks:

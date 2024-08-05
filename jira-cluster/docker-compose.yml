@@ -9,7 +9,7 @@ services:
     volumes:
       - ./jira-01:/var/jira:Z
     environment:
-      - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=${TZ} -Xms6048m -Xmx6048m
+      - CATALINA_OPTS=-Datlassian.cluster.scale=true -DjvmRoute=node1 -Duser.timezone=${TZ} -Xms10048m -Xmx10048m
     ulimits:
       nproc: 4096
       nofile:

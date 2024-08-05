@@ -2,7 +2,6 @@ FROM openjdk:17-bullseye
 ARG JIRA_VERSION=9.17.1
 ARG JIRA_PRODUCT=jira-software
 
-
 ENV JIRA_USER=jira \
 JIRA_GROUP=jira \
 JIRA_HOME=/var/jira \
@@ -10,9 +9,9 @@ JIRA_SETUP=/opt/jira \
 JVM_CODE_CACHE_ARGS='-XX:InitialCodeCacheSize=2g -XX:ReservedCodeCacheSize=4g' \
 AGENT_PATH=/var/agent \
 AGENT_FILENAME=atlassian-agent.jar
+ENV JAVA_OPTS="-javaagent:${AGENT_PATH}/${AGENT_FILENAME} ${JAVA_OPTS}"
 
 COPY atlassian-agent.jar ${AGENT_PATH}/${AGENT_FILENAME}
-ENV JAVA_OPTS="-javaagent:${AGENT_PATH}/${AGENT_FILENAME} ${JAVA_OPTS}"
 
 RUN mkdir -p ${JIRA_SETUP} ${JIRA_HOME} ${AGENT_PATH} \
     && curl -o /tmp/atlassian.tar.gz https://product-downloads.atlassian.com/software/jira/downloads/atlassian-${JIRA_PRODUCT}-${JIRA_VERSION}.tar.gz -L \

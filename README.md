@@ -2,11 +2,20 @@
 
 docker exec jira-bravo java -jar /var/agent/atlassian-agent.jar \
     -d \
-    -p is.origo.jira.tempo-plugin \
+    -p jira \
     -m Hello@world.com \
     -n Hello@world.com \
-    -o your-org \
-    -s B19V-1UF5-JQ0N-7C03
+    -o test \
+    -s BJ76-3PMT-WWRM-GNT6
+
+
+docker exec jira-bravo java -jar /var/agent/atlassian-agent.jar \
+    -d \
+    -p is.origo.jira.tempo-plugin \
+    -m abcd@xyz.com \
+    -n abcd@xyz.com \
+    -o test \
+    -s BJ76-3PMT-WWRM-GNT6
 
 
     
